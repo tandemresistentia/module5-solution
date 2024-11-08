@@ -1,0 +1,79 @@
+﻿<div class="container">
+    <h2>Sign up for our Newsletter</h2>
+    <form name="signUpForm" novalidate>
+        <!-- First Name -->
+        <div class="form-group" 
+             ng-class="{'has-error': signUpForm.firstName.$error.required && signUpForm.firstName.$touched}">
+            <label>First Name</label>
+            <input type="text" 
+                   name="firstName"
+                   class="form-control"
+                   ng-model="signUpCtrl.user.firstName"
+                   required>
+            <span ng-if="signUpForm.firstName.$error.required && signUpForm.firstName.$touched"
+                  class="help-block">First name is required</span>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group"
+             ng-class="{'has-error': signUpForm.lastName.$error.required && signUpForm.lastName.$touched}">
+            <label>Last Name</label>
+            <input type="text"
+                   name="lastName"
+                   class="form-control"
+                   ng-model="signUpCtrl.user.lastName"
+                   required>
+            <span ng-if="signUpForm.lastName.$error.required && signUpForm.lastName.$touched"
+                  class="help-block">Last name is required</span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group"
+             ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$touched}">
+            <label>Email</label>
+            <input type="email"
+                   name="email"
+                   class="form-control"
+                   ng-model="signUpCtrl.user.email"
+                   required>
+            <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched"
+                  class="help-block">Must be a valid email address</span>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group"
+             ng-class="{'has-error': signUpForm.phone.$invalid && signUpForm.phone.$touched}">
+            <label>Phone Number</label>
+            <input type="tel"
+                   name="phone"
+                   class="form-control"
+                   ng-model="signUpCtrl.user.phone"
+                   pattern="[0-9]{10}"
+                   required>
+            <span ng-if="signUpForm.phone.$invalid && signUpForm.phone.$touched"
+                  class="help-block">Must be a valid 10-digit phone number</span>
+        </div>
+
+        <!-- Favorite Menu Item -->
+        <div class="form-group"
+             ng-class="{'has-error': signUpCtrl.menuItemNotFound}">
+            <label>Favorite Menu Item Number</label>
+            <input type="text"
+                   name="favoriteItem"
+                   class="form-control"
+                   ng-model="signUpCtrl.user.favoriteItem"
+                   ng-blur="signUpCtrl.validateMenuItem()"
+                   required>
+            <span ng-if="signUpCtrl.menuItemNotFound"
+                  class="help-block">No such menu number exists</span>
+        </div>
+
+        <button class="btn btn-primary"
+                ng-click="signUpCtrl.submit()"
+                ng-disabled="signUpForm.$invalid">Submit</button>
+
+        <div ng-if="signUpCtrl.saved" class="alert alert-success">
+            Your information has been saved
+        </div>
+    </form>
+</div>
